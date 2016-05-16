@@ -1,39 +1,17 @@
-import TweetBox from "./components/TweetBox";
-import TweetsList from "./components/TweetsList";
-import TweetStore from "./stores/TweetStore";
-import TweetActions from "./actions/TweetActions";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Index from './components/Index'
+import Follow from './components/Follow'
+import { hashHistory } from 'react-router'
 
-TweetActions.getAllTweets();
+// using an ES6 transpiler, like babel
+import { Router, Route, Link } from 'react-router'
 
-let getAppState = () => {
-  return { tweetsList: TweetStore.getAll() };
-}
-
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = getAppState();
-    this._onChange = this._onChange.bind(this);
-  }
-
-  componentDidMount() {
-    TweetStore.addChangeListener(this._onChange)
-  }
-
-  componentWillUnmount() {
-    TweetStore.removeChangeListener(this._onChange)
-  }
-
-  _onChange() {
-    console.log (5, "wat? back to Main")
-    this.setState(getAppState());
-  }
-
-  render () {
+class App extends React.Component {
+  render() {
     return (
-      <div className="container">
-        <TweetBox />
-        <TweetsList tweets={this.state.tweetsList} />
+      <div>
+        {this.props.children}
       </div>
     );
   }
@@ -42,10 +20,17 @@ class Main extends React.Component {
 let documentReady = () => {
   let reactNode = document.getElementById('react');
   if (reactNode) {
-    ReactDOM.render(<Main />, reactNode);
+    ReactDOM.render(
+      <Router history={hashHistory}>
+        <Route component={App}>
+          <Route path="/" component={Index} />
+          <Route path="/follow" component={Follow} />
+        </Route>
+      </Router>
+    , reactNode);
   }
 };
 
 $(documentReady);
 
-window.Main = Main;
+window.Index = Index;
