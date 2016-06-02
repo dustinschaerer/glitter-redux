@@ -4,26 +4,39 @@
   <title>Glitter</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <nav>
+    <div class="nav-wrapper brown">
+      <a href="/" class="brand-logo">Rails & Redux</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Some Link</a></li>
+        <li><a href="#">Some Link</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <div class="right">
-  <% if user_signed_in? %>
-    Welcome <%= link_to current_user.display_name, "/profile" %>
-    <%= link_to "Logout", destroy_user_session_path, method: 'DELETE' %>
-  <% else %>
-    Please <%= link_to "login", new_user_session_path -%> or <%= link_to "sign up", new_user_registration_path  -%>
-  <% end %>
+
+  <div class="right-align">
+    <br>
+    <% if user_signed_in? %>
+      Welcome <%= link_to current_user.display_name, "/profile" %>,
+      <%= link_to "Logout", destroy_user_session_path, method: 'DELETE' %>
+    <% else %>
+      Please <%= link_to "login", new_user_session_path -%> or <%= link_to "sign up", new_user_registration_path  -%>
+    <% end %>
+    <br>
   </div>
 
-<%= yield %>
+  <div className="container">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+
+  <%= yield %>
 
 </body>
 </html>

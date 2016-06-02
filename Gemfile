@@ -18,7 +18,7 @@ gem 'devise'
 gem 'therubyracer', platforms: :ruby
 
 gem 'react-rails'
-
+gem 'materialize-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
